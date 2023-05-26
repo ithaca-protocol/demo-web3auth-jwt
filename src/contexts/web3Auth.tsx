@@ -18,6 +18,9 @@ export const useWeb3Auth = () => {
   return useContext(Web3AuthContext);
 };
 
+const clientId =
+  "BPzC0EqRrgec-gcCvL9MqGy2I_INt1rx2xomLNFqn09K-F5ElCWZOQ0UJsBXXrflmtBCQ7oZFATwzFampZ07nds";
+
 export const Web3AuthProvider: FC<any> = (props) => {
   const [web3auth, setWeb3Auth] = useState<Web3AuthNoModal>();
 
@@ -27,16 +30,29 @@ export const Web3AuthProvider: FC<any> = (props) => {
       console.log("Initializing web3auth");
       // Web3AuthNoModal - Constructor called
       const web3auth = new Web3AuthNoModal({
-        clientId:
-          "BB4zhbHOOGo82AtFhlun0RJo8QwIqu1A14u0yyw-esrg79OEupfm_33nQHPigI_yzvCn-EKmary6lM7xLMsm5YE",
+          clientId,
         chainConfig: {
           chainNamespace: CHAIN_NAMESPACES.EIP155,
-          chainId: "0x89",
+          chainId: "0x13881",
+		  rpcTarget: "https://rpc-mumbai.maticvigil.com/"
         },
+          web3AuthNetwork: "testnet",
+          useCoreKitKey: false,
       });
 
       // Configue OpenloginAdapter
-      const openloginAdapter = new OpenloginAdapter();
+	 const openloginAdapter = new OpenloginAdapter({
+          adapterSettings: {
+		  // uxMode: "redirect",
+            loginConfig: {
+              jwt: {
+                verifier: "demo_thea_testnet",
+                typeOfLogin: "jwt",
+                clientId,
+              },
+            },
+          },
+        });
       web3auth.configureAdapter(openloginAdapter);
 
       try {
