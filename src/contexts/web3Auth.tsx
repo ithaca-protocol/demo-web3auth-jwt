@@ -31,7 +31,7 @@ export const Web3AuthProvider: FC<any> = (props) => {
           "BB4zhbHOOGo82AtFhlun0RJo8QwIqu1A14u0yyw-esrg79OEupfm_33nQHPigI_yzvCn-EKmary6lM7xLMsm5YE",
         chainConfig: {
           chainNamespace: CHAIN_NAMESPACES.EIP155,
-          chainId: "0x89",
+          chainId: "0x13881",
         },
       });
 
